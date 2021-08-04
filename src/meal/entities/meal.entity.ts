@@ -1,4 +1,5 @@
-import { Column, Model, Table, DataType } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, HasMany } from 'sequelize-typescript';
+import { Food } from '../../food/food.model';
 
 @Table
 export class Meal extends Model {
@@ -22,4 +23,7 @@ export class Meal extends Model {
     type: boolean;
     default: true;
   };
+
+  @HasMany(() => Food)
+  foods: Food[];
 }

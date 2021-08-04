@@ -1,8 +1,17 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  HasOne,
+  Model,
+  Table
+} from "sequelize-typescript";
+import { Meal } from '../meal/entities/meal.entity';
 
 @Table
 export class Food extends Model {
-  @Column
+  @Column({ type: DataType.STRING })
   name: {
     type: string;
     allowNull: false;
@@ -11,12 +20,16 @@ export class Food extends Model {
   @Column
   quantity: number;
 
-  @Column
-  mealType: string;
-
-  @Column
+  @Column({ type: DataType.BOOLEAN })
   isDetonationActive: {
     type: boolean;
     default: false;
   };
+
+  @ForeignKey(() => Meal)
+  @Column
+  mealId: number;
+
+  @BelongsTo(() => Meal)
+  meal: Meal;
 }

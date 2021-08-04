@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { FoodService } from './food.service';
 import { FoodController } from './food.controller';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { Food } from './food.model';
 
 @Module({
+  imports: [SequelizeModule.forFeature([Food])],
   controllers: [FoodController],
-  providers: [FoodService]
+  providers: [FoodService],
 })
 export class FoodModule {}
